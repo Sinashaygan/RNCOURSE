@@ -24,7 +24,14 @@ export default function GoalsInput({ onAddGoal, visible }) {
           value={enteredGoalText}
         />
 
-        <Button title="Add goal" onPress={addGoalHandler} />
+        <View style={styles.buttonContainer}>
+          <View style={styles.button}>
+            <Button title="Add goal" onPress={addGoalHandler} />
+          </View>
+          <View style={styles.button}>
+            <Button title="Cancel"/>
+          </View>
+        </View>
       </View>
     </Modal>
   );
@@ -33,10 +40,9 @@ export default function GoalsInput({ onAddGoal, visible }) {
 const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
-    paddingBottom: 24,
+    padding: 24,
     borderBottomWidth: 1,
     borderColor: "#cccccc",
   },
@@ -44,8 +50,17 @@ const styles = StyleSheet.create({
   textInput: {
     borderWidth: 1,
     borderColor: "#cccccc",
-    width: "80%",
+    width: "100%",
     padding: 8,
-    marginRight: 8,
+    margin:24,
   },
+
+  buttonContainer:{
+    flexDirection:"row"
+  },
+
+  button:{
+    width:'40%',
+    marginHorizontal:8
+  }
 });
