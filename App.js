@@ -32,10 +32,22 @@ export default function App() {
     setModalIsVisible(true);
   }
 
+  function endAddGoalHandler() {
+    setModalIsVisible(false);
+  }
+
   return (
     <View style={styles.appContainer}>
-      <Button title="Add New Goal" color="#5e0acc" onPress={startAddGoalHandler}/>
-      <GoalsInput onAddGoal={addGoalHandler} visible={modalIsVisible}/>
+      <Button
+        title="Add New Goal"
+        color="#5e0acc"
+        onPress={startAddGoalHandler}
+      />
+      <GoalsInput
+        onAddGoal={addGoalHandler}
+        visible={modalIsVisible}
+        onCancel={endAddGoalHandler}
+      />
 
       <View style={styles.goalsContainer}>
         <FlatList
