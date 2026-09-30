@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
+import { FlatList } from "react-native";
 import { ScrollView } from "react-native";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 
@@ -12,7 +13,10 @@ export default function App() {
   }
 
   function addGoalHandler() {
-    setCourseGoals([...courseGoals, enteredGoalText]);
+    setCourseGoals([
+      ...courseGoals,
+      { text: enteredGoalText, key: Math.random().toString() },
+    ]);
   }
 
   return (
@@ -27,13 +31,20 @@ export default function App() {
       </View>
 
       <View style={styles.goalsContainer}>
-        <ScrollView alwaysBounceVertical={false}>
-          {courseGoals.map((goal) => (
-            <View key={goal} style={styles.goalItem}>
-              <Text style={styles.goalText}>{goal}</Text>
-            </View>
-          ))}
-        </ScrollView>
+        <FlatList
+          data={courseGoals}
+          renderItem={(itemData) => {
+            return (
+              <View style={styles.goalItem}>
+                <Text style={styles.goalText}>{itemData.item.text}</Text>
+              </View>
+            );
+          }}
+          keyExtractor={(item, index) => {
+            return item.key;
+          }}
+          alwaysBounceVertical={false}
+        />
       </View>
     </View>
   );
