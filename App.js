@@ -9,7 +9,7 @@ export default function App() {
         <Button title="add goal" />
       </View>
 
-      <View>
+      <View style={styles.goalsContainer}>
         <Text>list of goals...</Text>
       </View>
     </View>
@@ -18,11 +18,13 @@ export default function App() {
 
 const styles = StyleSheet.create({
   appContainer: {
+    flex:1,
     paddingTop: 50,
     paddingHorizontal:20,
   },
 
   inputContainer: {
+    flex:1,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems:"center",
@@ -38,4 +40,8 @@ const styles = StyleSheet.create({
     padding:8,
     marginRight:8
   },
+
+  goalsContainer:{
+    flex:5
+  }
 });
