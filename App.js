@@ -20,8 +20,8 @@ export default function App() {
     ]);
   }
 
-  function deleteGoalHandler(){
-    console.log('delete')
+  function deleteGoalHandler(id){
+    setCourseGoals(currentCourseGoals => currentCourseGoals.filter((goal)=> goal.key !== id))
   }
 
   return (
@@ -32,7 +32,7 @@ export default function App() {
         <FlatList
           data={courseGoals}
           renderItem={({ item }) => (
-            <GoalItem text={item.text} deleteGoalHandler={deleteGoalHandler} />
+            <GoalItem text={item.text} deleteGoalHandler={deleteGoalHandler} id={item.key}/>
           )}
           keyExtractor={(item) => item.key}
           alwaysBounceVertical={false}
