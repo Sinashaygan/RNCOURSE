@@ -6,12 +6,13 @@ export default function App() {
   return (
     <LinearGradient colors={["#410422", "#ddb52f"]} style={styles.rootScreen}>
       <ImageBackground
-        source={require("./assets/image/images.jpg")}
+        source={require("./assets/image/download.jpg")}
         resizeMode="cover"
         style={styles.rootScreen}
         imageStyle={styles.backgroundImage}
-      />
-      <StartGameScreen />
+      >
+        <StartGameScreen />
+      </ImageBackground>
     </LinearGradient>
   );
 }
