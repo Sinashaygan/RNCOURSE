@@ -12,6 +12,7 @@ export default function PrimaryButton(props) {
             ? [styles.buttonInnerContainer, styles.pressed]
             : styles.buttonInnerContainer
         }
+        onPress={props.onPress}
       >
         <Text style={styles.buttonText}>{props.children}</Text>
       </Pressable>
