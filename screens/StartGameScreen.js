@@ -4,6 +4,8 @@ import PrimaryButton from "../components/ui/PrimaryButton";
 import { StyleSheet } from "react-native";
 import { useState } from "react";
 import { COLORS } from "../constants/colors";
+import Title from "../components/ui/Title";
+import { Text } from "react-native";
 
 export default function StartGameScreen({ onPickNumber }) {
   const [enteredNumber, setEnteredNumber] = useState("");
@@ -32,23 +34,27 @@ export default function StartGameScreen({ onPickNumber }) {
   }
 
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        style={styles.numberInput}
-        maxLength={2}
-        keyboardType="number-pad"
-        autoCapitalize="none"
-        autoCorrect={false}
-        value={enteredNumber}
-        onChangeText={numberInputHandler}
-      />
+    <View style={styles.rootContainer}>
+      <Title>Guess my number</Title>
+      <View style={styles.inputContainer}>
+      <Text style={styles.instructionText}>Enter a Number</Text>
+        <TextInput
+          style={styles.numberInput}
+          maxLength={2}
+          keyboardType="number-pad"
+          autoCapitalize="none"
+          autoCorrect={false}
+          value={enteredNumber}
+          onChangeText={numberInputHandler}
+        />
 
-      <View style={styles.buttonsContainer}>
-        <View style={styles.buttonContainer}>
-          <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
-        </View>
-        <View style={styles.buttonContainer}>
-          <PrimaryButton onPress={confirmHandler}>Confirm</PrimaryButton>
+        <View style={styles.buttonsContainer}>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+          </View>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={confirmHandler}>Confirm</PrimaryButton>
+          </View>
         </View>
       </View>
     </View>
@@ -60,7 +66,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 16,
-    marginTop: 100,
+    marginTop: 36,
     backgroundColor: COLORS.primary800,
     marginHorizontal: 24,
     borderRadius: 8,
@@ -68,6 +74,17 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 6,
     shadowOpacity: 0.25,
+  },
+
+  rootContainer:{
+    flex:1,
+    marginTop: 100,
+    alignItems:"center"
+  },
+
+  instructionText:{
+    color:COLORS.accent500,
+    fontSize:24
   },
 
   numberInput: {
