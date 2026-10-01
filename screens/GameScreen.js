@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Alert, StyleSheet } from "react-native";
 import { Text } from "react-native";
 import { View } from "react-native";
 import Title from "../components/ui/Title";
@@ -28,10 +28,20 @@ export default function GameScreen({ userNumber }) {
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
 
   function nextGuessHandler(direction) {
+    if (
+      (direction === "lower" && currentGuess < userNumber) ||
+      (direction === "greater" && currentGuess > userNumber)
+    ) {
+      Alert.alert("Don't lie!", "You know that this is wrong...", [
+        { text: "Sorry", styles: "cancel" },
+      ]);
+      return;
+    }
+
     if (direction === "lower") {
       MAX_BOUNDARY = currentGuess;
     } else {
-      MIN_BOUNDARY_BOUNDARY = currentGuess + 1;
+      MIN_BOUNDARY = currentGuess + 1;
     }
 
     const newRndNumber = generateRandomBetween(
@@ -50,10 +60,10 @@ export default function GameScreen({ userNumber }) {
       <View>
         <Text>Higher or Lower?</Text>
         <View>
-          <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
+          <PrimaryButton onPress={nextGuessHandler.bind(this, "greater")}>
             +
           </PrimaryButton>
-          <PrimaryButton onPress={nextGuessHandler.bind(this, "greater")}>
+          <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
             -
           </PrimaryButton>
         </View>
