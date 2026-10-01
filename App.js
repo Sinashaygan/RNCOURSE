@@ -1,80 +1,57 @@
+import { ImageBackground, StyleSheet } from "react-native";
+import StartGameScreen from "./screens/StartGameScreen";
+import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
-import GoalItem from "./components/GoalItem";
-import GoalsInput from "./components/GoalsInput";
-import { Button } from "react-native";
+import GameScreen from "./screens/GameScreen";
+import { SafeAreaView } from "react-native";
+import { COLORS } from "./constants/colors";
+import GameOverScreen from "./screens/GameOverScreen";
 
 export default function App() {
-  const [courseGoals, setCourseGoals] = useState([]);
-  const [modalIsVisible, setModalIsVisible] = useState(false);
+  const [userNumber , setUserNumber] = useState()
+  const [gameOver , setGameOver] = useState(true)
 
-  function addGoalHandler(enteredGoalText) {
-    if (enteredGoalText.trim().length === 0) {
-      return;
-    }
-
-    setCourseGoals((currentCourseGoals) => [
-      ...currentCourseGoals,
-      {
-        text: enteredGoalText,
-        key: Math.random().toString(),
-      },
-    ]);
+  function pickNumberHandler(pickedNumber){
+    setUserNumber(pickedNumber)
+    setGameOver(false)
   }
 
-  function deleteGoalHandler(id) {
-    setCourseGoals((currentCourseGoals) =>
-      currentCourseGoals.filter((goal) => goal.key !== id),
+  function gameOverHandle() {
+    setGameOver(true)
+  }
+
+  let screen = <StartGameScreen onPickNumber={pickNumberHandler} />;
+
+  if (userNumber) {
+    screen = (
+      <GameScreen userNumber={userNumber} gameOverHandle={gameOverHandle} />
     );
   }
 
-  function startAddGoalHandler() {
-    setModalIsVisible(true);
-  }
-
-  function endAddGoalHandler() {
-    setModalIsVisible(false);
+  if (gameOver && userNumber) {
+    screen = <GameOverScreen/>
   }
 
   return (
-    <View style={styles.appContainer}>
-      <Button
-        title="Add New Goal"
-        color="#5e0acc"
-        onPress={startAddGoalHandler}
-      />
-      <GoalsInput
-        onAddGoal={addGoalHandler}
-        visible={modalIsVisible}
-        onCancel={endAddGoalHandler}
-      />
-
-      <View style={styles.goalsContainer}>
-        <FlatList
-          data={courseGoals}
-          renderItem={({ item }) => (
-            <GoalItem
-              text={item.text}
-              deleteGoalHandler={deleteGoalHandler}
-              id={item.key}
-            />
-          )}
-          keyExtractor={(item) => item.key}
-          alwaysBounceVertical={false}
-        />
-      </View>
-    </View>
+    <LinearGradient colors={[COLORS.primary700, COLORS.accent500]} style={styles.rootScreen}>
+      <ImageBackground
+        source={require("./assets/image/download.jpg")}
+        resizeMode="cover"
+        style={styles.rootScreen}
+        imageStyle={styles.backgroundImage}
+      >
+        <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
+      </ImageBackground>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
-  appContainer: {
+  rootScreen: {
     flex: 1,
-    paddingTop: 50,
-    paddingHorizontal: 20,
   },
 
-  goalsContainer: {
-    flex: 5,
+  backgroundImage: {
+    opacity: 0.15,
   },
 });
