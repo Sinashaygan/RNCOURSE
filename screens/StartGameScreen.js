@@ -37,8 +37,9 @@ export default function StartGameScreen() {
         autoCapitalize="none"
         autoCorrect={false}
         value={enteredNumber}
-        onChange={numberInputHandler}
+        onChangeText={numberInputHandler}
       />
+
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonContainer}>
           <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
