@@ -5,6 +5,7 @@ import Title from "../components/ui/Title";
 import { useEffect, useState } from "react";
 import NumberContainer from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
+import Card from "../components/ui/Card";
 
 function generateRandomBetween(min, max, exclude) {
   const rndNum = Math.floor(Math.random() * (max - min)) + min;
@@ -20,18 +21,14 @@ let MIN_BOUNDARY = 1;
 let MAX_BOUNDARY = 100;
 
 export default function GameScreen({ userNumber, gameOverHandle }) {
-  const initialGuess = generateRandomBetween(
-    1,
-    100,
-    userNumber,
-  );
+  const initialGuess = generateRandomBetween(1, 100, userNumber);
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
 
   useEffect(() => {
     if (currentGuess === userNumber) {
-      gameOverHandle()
+      gameOverHandle();
     }
-  }, [currentGuess , userNumber , gameOverHandle]);
+  }, [currentGuess, userNumber, gameOverHandle]);
 
   function nextGuessHandler(direction) {
     if (
@@ -63,7 +60,7 @@ export default function GameScreen({ userNumber, gameOverHandle }) {
       <Title>Opponent's Guess</Title>
       <NumberContainer>{currentGuess}</NumberContainer>
 
-      <View>
+      <Card>
         <Text>Higher or Lower?</Text>
         <View>
           <PrimaryButton onPress={nextGuessHandler.bind(this, "greater")}>
@@ -73,7 +70,7 @@ export default function GameScreen({ userNumber, gameOverHandle }) {
             -
           </PrimaryButton>
         </View>
-      </View>
+      </Card>
     </View>
   );
 }
