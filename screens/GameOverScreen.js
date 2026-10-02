@@ -13,7 +13,12 @@ export default function GameOverScreen() {
         <Image
           style={styles.image}
           source={require("../assets/image/succes.jpg")}
+          resizeMode="cover"
         />
+      </View>
+
+      <View>
+        <Text>Your phone needed X rounds to guess the number Y.</Text>
       </View>
     </View>
   );
