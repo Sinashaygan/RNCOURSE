@@ -89,12 +89,14 @@ const styles = StyleSheet.create({
     padding: 24,
   },
 
-  instructionText:{
-    marginBottom:12
+  instructionText: {
+    marginBottom: 12,
   },
 
   buttonsContainer: {
     flexDirection: "row",
+    width: "100%",
+    gap: 8,
   },
 
   buttonContainer: {
