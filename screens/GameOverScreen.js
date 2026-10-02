@@ -6,7 +6,11 @@ import { StyleSheet } from "react-native";
 import { COLORS } from "../constants/colors";
 import PrimaryButton from "../components/ui/PrimaryButton";
 
-export default function GameOverScreen() {
+export default function GameOverScreen({
+  roundsNumber,
+  userNumber,
+  onStartNewGame,
+}) {
   return (
     <View style={styles.screenRootContainer}>
       <Title>Game Over!</Title>
@@ -19,11 +23,12 @@ export default function GameOverScreen() {
       </View>
 
       <Text style={styles.summeryText}>
-        Your phone needed <Text style={styles.highlight}>X</Text> rounds to
-        guess the number <Text style={styles.highlight}>Y</Text>.
+        Your phone needed <Text style={styles.highlight}>{roundsNumber}</Text>{" "}
+        rounds to guess the number{" "}
+        <Text style={styles.highlight}>{userNumber}</Text>.
       </Text>
 
-      <PrimaryButton>Start New Game</PrimaryButton>
+      <PrimaryButton onPress={onStartNewGame}>Start New Game</PrimaryButton>
     </View>
   );
 }
@@ -53,9 +58,9 @@ const styles = StyleSheet.create({
 
   summeryText: {
     fontFamily: "open-sans",
-    fontSize:24,
-    textAlign:'center',
-    marginVertical:24,
+    fontSize: 24,
+    textAlign: "center",
+    marginVertical: 24,
   },
 
   highlight: {
