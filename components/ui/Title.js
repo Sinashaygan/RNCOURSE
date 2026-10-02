@@ -16,5 +16,6 @@ const styles = StyleSheet.create({
     padding: 12,
     maxWidth: "80%",
     width: 300,
+    textAlign:"center"
   },
 });
