@@ -37,7 +37,7 @@ export default function GameScreen({ userNumber, gameOverHandle }) {
       (direction === "greater" && currentGuess > userNumber)
     ) {
       Alert.alert("Don't lie!", "You know that this is wrong...", [
-        { text: "Sorry", styles: "cancel" },
+        { text: "Sorry", style: "cancel" },
       ]);
       return;
     }
@@ -67,13 +67,14 @@ export default function GameScreen({ userNumber, gameOverHandle }) {
         </InstructionText>
         <View style={styles.buttonsContainer}>
           <View style={styles.buttonContainer}>
-            <PrimaryButton onPress={nextGuessHandler.bind(this, "greater")}>
-              <Ionicons name="md-add" size={24} color="white" />
+            <PrimaryButton onPress={() => nextGuessHandler("greater")}>
+              <Ionicons name="add" size={24} color="white" />
             </PrimaryButton>
           </View>
-          <View>
-            <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
-              <Ionicons name="md-remove" size={24} color="white" />
+
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={() => nextGuessHandler("lower")}>
+              <Ionicons name="remove" size={24} color="white" />
             </PrimaryButton>
           </View>
         </View>
