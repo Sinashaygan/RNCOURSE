@@ -9,6 +9,7 @@ import InstructionText from "../components/ui/InstructionText";
 import { Ionicons } from "@expo/vector-icons";
 import { Text } from "react-native";
 import { FlatList } from "react-native";
+import GuessLogItem from "../components/ui/GuessLogItem"
 
 function generateRandomBetween(min, max, exclude) {
   const rndNum = Math.floor(Math.random() * (max - min)) + min;
@@ -92,8 +93,13 @@ export default function GameScreen({ userNumber, gameOverHandle }) {
       <View>
         <FlatList
           data={guessRounds}
-          renderItem={(itemData) => <Text>{itemData.item}</Text>}
-          keyExtractor={(item) => item}
+          renderItem={({ item, index }) => (
+            <GuessLogItem
+              roundNumber={guessRounds.length - index}
+              guess={item}
+            />
+          )}
+          keyExtractor={(item) => item.toString()}
         />
       </View>
     </View>

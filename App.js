@@ -7,7 +7,7 @@ import { SafeAreaView } from "react-native";
 import { COLORS } from "./constants/colors";
 import GameOverScreen from "./screens/GameOverScreen";
 import { useFonts } from "expo-font";
-import AppLoading from "expo-app-loading";
+import { ActivityIndicator } from "react-native";
 
 export default function App() {
   const [userNumber, setUserNumber] = useState();
@@ -33,7 +33,11 @@ export default function App() {
   }
 
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return (
+      <View style={styles.rootScreen}>
+        <ActivityIndicator />
+      </View>
+    );
   }
 
   let screen = <StartGameScreen onPickNumber={pickNumberHandler} />;

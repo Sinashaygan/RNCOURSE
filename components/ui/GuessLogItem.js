@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
   },
 
-  itemText:{
-    fontFamily:'open-sans'
-  }
+  itemText: {
+    fontFamily: "open-sans",
+  },
 });
