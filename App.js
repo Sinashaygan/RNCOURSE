@@ -3,11 +3,11 @@ import StartGameScreen from "./screens/StartGameScreen";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
 import GameScreen from "./screens/GameScreen";
-import { SafeAreaView } from "react-native";
 import { COLORS } from "./constants/colors";
 import GameOverScreen from "./screens/GameOverScreen";
 import { useFonts } from "expo-font";
 import { ActivityIndicator } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function App() {
   const [userNumber, setUserNumber] = useState();
@@ -29,7 +29,7 @@ export default function App() {
   }
 
   function startNewGameHandler() {
-    setUserNumber(null)
+    setUserNumber(null);
     setGuessRounds(0);
   }
 
@@ -70,7 +70,12 @@ export default function App() {
         style={styles.rootScreen}
         imageStyle={styles.backgroundImage}
       >
-        <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
+        <SafeAreaView
+          style={styles.rootScreen}
+          edges={["top", "left", "right"]}
+        >
+          {screen}
+        </SafeAreaView>
       </ImageBackground>
     </LinearGradient>
   );
