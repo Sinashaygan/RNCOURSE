@@ -31,6 +31,11 @@ export default function GameScreen({ userNumber, gameOverHandle }) {
     }
   }, [currentGuess, userNumber, gameOverHandle]);
 
+  useEffect(() => {
+    MIN_BOUNDARY = 1;
+    MAX_BOUNDARY = 100;
+  }, []);
+
   function nextGuessHandler(direction) {
     if (
       (direction === "lower" && currentGuess < userNumber) ||
