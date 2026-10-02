@@ -7,9 +7,8 @@ import PrimaryButton from "../components/ui/PrimaryButton";
 import Card from "../components/ui/Card";
 import InstructionText from "../components/ui/InstructionText";
 import { Ionicons } from "@expo/vector-icons";
-import { Text } from "react-native";
 import { FlatList } from "react-native";
-import GuessLogItem from "../components/ui/GuessLogItem"
+import GuessLogItem from "../components/ui/GuessLogItem";
 
 function generateRandomBetween(min, max, exclude) {
   const rndNum = Math.floor(Math.random() * (max - min)) + min;
@@ -31,7 +30,7 @@ export default function GameScreen({ userNumber, gameOverHandle }) {
 
   useEffect(() => {
     if (currentGuess === userNumber) {
-      gameOverHandle();
+      gameOverHandle(guessRounds.length);
     }
   }, [currentGuess, userNumber, gameOverHandle]);
 
@@ -90,7 +89,7 @@ export default function GameScreen({ userNumber, gameOverHandle }) {
         </View>
       </Card>
 
-      <View>
+      <View style={styles.listContainer}>
         <FlatList
           data={guessRounds}
           renderItem={({ item, index }) => (
@@ -124,5 +123,10 @@ const styles = StyleSheet.create({
 
   buttonContainer: {
     flex: 1,
+  },
+
+  listContainer: {
+    flex: 1,
+    padding: 16,
   },
 });
