@@ -8,6 +8,7 @@ import GameOverScreen from "./screens/GameOverScreen";
 import { useFonts } from "expo-font";
 import { ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { View } from "react-native";
 
 export default function App() {
   const [userNumber, setUserNumber] = useState();
